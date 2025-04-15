@@ -1,0 +1,61 @@
+/* Reset de estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f7f6;  /* Cor de fundo clara */
+    color: #333;  /* Cor do texto */
+}
+
+/* Cabeçalho */
+.header {
+    text-align: center;
+    padding: 20px;
+    background-color: #66BB6A;  /* Verde claro */
+    color: white;
+}
+
+/* Dashboard */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+/* Status da temperatura e umidade */
+.status {
+    font-size: 24px;
+    color: #ff9800; /* Cor laranja para alertas */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Contêiner do gráfico */
+.chart-container {
+    width: 80%;
+    margin-top: 20px;
+}
+
+/* Tabela para exibir os dados */
+.data-table {
+    width: 80%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.data-table th, .data-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.data-table th {
+    background-color: #66BB6A;  /* Verde */
+    color: white;
+}
