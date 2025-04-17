@@ -1,0 +1,118 @@
+[
+    {
+        "id": "923919c84d8f7016",
+        "type": "tab",
+        "label": "Fluxo 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "35fb7054d96f4ba8",
+        "type": "function",
+        "z": "923919c84d8f7016",
+        "name": "Tratamento dos Dados",
+        "func": "let ldr = msg.payload.ldr;\nlet temp = msg.payload.temp;\nlet umi = msg.payload.umi;\nlet datahora = new Date();\ndatahora.setHours(datahora.getHours() - 3);\nlet time = datahora.toISOString().slice(0, 19).replace('T', ' ');\nmsg.topic = \"INSERT INTO dados (datahora, ldr, temp, umi) VALUES (?, ?, ?, ?)\";\nmsg.payload = [time, ldr, temp, umi];\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 180,
+        "wires": [
+            [
+                "3eb5cb26ed1e68d0"
+            ]
+        ]
+    },
+    {
+        "id": "89cf44f8c4a4934a",
+        "type": "function",
+        "z": "923919c84d8f7016",
+        "name": "function 5",
+        "func": "// variáveis globais\nmsg.topic = \"SELECT * FROM sensores\"\n\n/*\nmsg.payload = {\n    temp: global.get(\"temperatura\") || 0,\n    umi: global.get(\"umidade\") || 0,\n    ldr: global.get(\"luminosidade\") || 0\n};\n*/\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 80,
+        "wires": [
+            [
+                "3eb5cb26ed1e68d0"
+            ]
+        ]
+    },
+    {
+        "id": "5a6a575e51b8ae6f",
+        "type": "json",
+        "z": "923919c84d8f7016",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 250,
+        "y": 180,
+        "wires": [
+            [
+                "35fb7054d96f4ba8"
+            ]
+        ]
+    },
+    {
+        "id": "bf9fce38c2dd0ac0",
+        "type": "http in",
+        "z": "923919c84d8f7016",
+        "name": "",
+        "url": "/dados",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 490,
+        "y": 80,
+        "wires": [
+            [
+                "89cf44f8c4a4934a"
+            ]
+        ]
+    },
+    {
+        "id": "0737e0491d875974",
+        "type": "http response",
+        "z": "923919c84d8f7016",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 990,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "3eb5cb26ed1e68d0",
+        "type": "mysql",
+        "z": "923919c84d8f7016",
+        "mydb": "b4a96536ec9f5088",
+        "name": "BD PI",
+        "x": 830,
+        "y": 220,
+        "wires": [
+            [
+                "0737e0491d875974"
+            ]
+        ]
+    },
+    {
+        "id": "b4a96536ec9f5088",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "dados",
+        "tz": "",
+        "charset": "UTF8"
+    }
+]

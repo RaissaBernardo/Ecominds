@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EcoMinds - Dashboard Ambiental</title>
+  <link rel="stylesheet" href="style/dash.css" />
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="js/fetch.js" defer></script>
+</head>
+<body>
+  <div class="header">
+    <h1>EcoMinds - Monitoramento Ambiental</h1>
+    <p>Visualização de Dados de Temperatura, Umidade e Luminosidade</p>
+  </div>
+
+  <div class="dashboard">
+    <div class="status" id="status">
+      <p>Carregando dados...</p>
+    </div>
+
+    <div class="chart-container" id="chart"></div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Temperatura (°C)</th>
+          <th>Umidade (%)</th>
+          <th>Luminosidade</th>
+          <th>Data/Hora</th>
+        </tr>
+      </thead>
+      <tbody id="tabela-dados">
+       
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
