@@ -9,6 +9,8 @@ Este sistema utiliza sensores conectados a um Arduino para coletar informações
 
 A interface web oferece uma experiência direta e acessível para usuários que precisam monitorar o ambiente com precisão, seja em indústrias, laboratórios ou outros espaços internos que exigem controle climático constante.
 
+PROJETO EM EVOLUÇÃO
+
 ## Funcionalidades
 
 - Visualização em tempo real da temperatura e umidade.
