@@ -1,23 +1,39 @@
 const express = require('express');
-const SerialPort = require('serialport');
-const Readline = require('@serialport/parser-readline');
-const cors = require('cors');
-
+const mysql = require('mysql2');
 const app = express();
-app.use(cors());
+const port = 3000;
 
-const port = new SerialPort('COM3', { baudRate: 9600 }); // troque 'COM3' pela sua porta
-const parser = port.pipe(new Readline({ delimiter: '\n' }));
+app.use(express.static('public'));
 
-let dados = {};
-
-parser.on('data', linha => {
-  try {
-    dados = JSON.parse(linha);
-  } catch (e) {
-    console.log("Erro no JSON:", linha);
-  }
+// Conexão com o banco
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'aluno',
+  database: 'dados'
 });
 
-app.get('/dados', (req, res) => res.json(dados));
-app.listen(3000, () => console.log("Rodando em http://localhost:3000"));
+// Último dado do sensor
+app.get('/api/sensores', (req, res) => {
+  db.query('SELECT * FROM sensores ORDER BY id DESC LIMIT 1', (err, results) => {
+    if (err) {
+      return res.status(500).json({ erro: 'Erro ao buscar dados' });
+    }
+    res.json(results[0]);
+  });
+});
+
+// Histórico para gráfico
+app.get('/api/historico', (req, res) => {
+  db.query('SELECT DATE_FORMAT(data_hora, "%H:%i") as hora, temperatura FROM sensores ORDER BY id DESC LIMIT 10', (err, results) => {
+    if (err) {
+      return res.status(500).json({ erro: 'Erro ao buscar histórico' });
+    }
+    res.json(results.reverse()); // Em ordem cronológica
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Servidor rodando em http://localhost:${1880}`);
+});
+
