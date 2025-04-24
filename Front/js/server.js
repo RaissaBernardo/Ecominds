@@ -1,7 +1,7 @@
 const express = require('express');
 const mysql = require('mysql2');
 const app = express();
-const port = 3000;
+const port = 5500;
 
 app.use(express.static('public'));
 
@@ -25,7 +25,8 @@ app.get('/api/sensores', (req, res) => {
 
 // Histórico para gráfico
 app.get('/api/historico', (req, res) => {
-  db.query('SELECT DATE_FORMAT(data_hora, "%H:%i") as hora, temperatura FROM sensores ORDER BY id DESC LIMIT 10', (err, results) => {
+  db.query('SELECT DATE_FORMAT(datahora, "%H:%i") as hora, temp as temperatura FROM sensores ORDER BY id DESC LIMIT 10', (err, results) => {
+
     if (err) {
       return res.status(500).json({ erro: 'Erro ao buscar histórico' });
     }
@@ -34,6 +35,6 @@ app.get('/api/historico', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${1880}`);
+  console.log(`Servidor rodando em http://localhost:${port}`);
 });
 

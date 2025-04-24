@@ -9,7 +9,7 @@ function verificarCondicao(temp, umid) {
 
 async function buscarDadosSensor() {
   try {
-    const response = await fetch('/api/sensores');
+    const response = await fetch('http://localhost:3000/api/sensores');
     const dados = await response.json();
 
     const temperatura = parseFloat(dados.temperatura);
@@ -30,7 +30,7 @@ async function buscarDadosSensor() {
 
 async function carregarGraficoTemperatura() {
   try {
-    const response = await fetch('/api/historico');
+    const response = await fetch('http://localhost:3000/api/historico');
     const dados = await response.json();
 
     const horas = dados.map(d => d.hora);
