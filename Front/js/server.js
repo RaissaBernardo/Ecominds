@@ -38,3 +38,8 @@ app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
 
+const cors = require('cors');
+
+// Adicione isso logo após a linha de definição do app
+app.use(cors());
+

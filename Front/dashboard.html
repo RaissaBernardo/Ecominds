@@ -7,21 +7,25 @@
   <link rel="stylesheet" href="style/dash.css" />
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="js/fetch.js" defer></script>
-  <script src="js/script.js"></script>
+  <script src="js/script.js" defer></script>
+  
+  <header class="cabecalho">
+    <img id="img" src="img/logo.png">
+    <h1 id="logo">Ecominds</h1>
+    <div class="intro">
+      <h1>Monitoramento Ambiental</h1>
+      <p>Visualização de Dados de Temperatura e Umidade</p>
+    </div>
+</header>
 </head>
 <body>
-  <div class="header">
-    <h1>EcoMinds - Monitoramento Ambiental</h1>
-    <p>Visualização de Dados de Temperatura, Umidade e Luminosidade</p>
-  </div>
 
   <div class="dashboard">
     <div class="status" id="status">
-      <p>Temperatura: <span id="temperatura">--</span></p>
-      <p>Umidade: <span id="umidade">--</span></p>
+      <p>Temperatura: <span id="temperatura">--</span>°C</p>
+      <p>Umidade: <span id="umidade">--</span>%</p>
       <p>Status: <span id="status-condicao" class="status-normal">--</span></p>
     </div>
-    
 
     <div class="chart-container" id="grafico-temperatura"></div>
 
@@ -30,12 +34,11 @@
         <tr>
           <th>Temperatura (°C)</th>
           <th>Umidade (%)</th>
-          <th>Luminosidade</th>
           <th>Data/Hora</th>
         </tr>
       </thead>
       <tbody id="tabela-dados">
-       
+        <!-- Dados serão inseridos via JavaScript -->
       </tbody>
     </table>
   </div>

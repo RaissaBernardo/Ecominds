@@ -1,41 +1,26 @@
 const dadosRecentes = [];
 
 function atualizarDashboard() {
-  fetch('http://10.110.3.139:1880/dados') // ip externo
+  fetch('http://localhost:5500/api/sensores')
     .then(res => res.json())
     .then(d => {
-      // att status
+      // Atualiza o bloco de status
       document.getElementById('status').innerHTML = `
-        <p><strong>Temperatura Atual:</strong> ${d.temp}°C |
-        <strong>Umidade Atual:</strong> ${d.umi}% |
-        <strong>Luminosidade:</strong> ${d.ldr}</p>
+        <p>Temperatura: <span id="temperatura">${d.temp.toFixed(1)}</span>°C</p>
+        <p>Umidade: <span id="umidade">${d.umi.toFixed(1)}</span>%</p>
+        <p>Status: <span id="status-condicao">${document.getElementById('status-condicao').textContent}</span></p>
       `;
 
       const agora = new Date().toLocaleTimeString();
-      dadosRecentes.push({ ...d, hora: agora });
+      dadosRecentes.push({ temp: d.temp, umi: d.umi, hora: agora });
       if (dadosRecentes.length > 10) dadosRecentes.shift();
 
-      //att grafico
-      const trace = {
-        x: dadosRecentes.map(item => item.hora),
-        y: dadosRecentes.map(item => item.temp),
-        type: 'scatter',
-        name: 'Temperatura'
-      };
-
-      Plotly.newPlot('chart', [trace], {
-        title: 'Temperatura ao Longo do Tempo',
-        xaxis: { title: 'Hora' },
-        yaxis: { title: '°C' }
-      });
-
-      // att tab
+      // Atualiza a tabela
       const tbody = document.getElementById('tabela-dados');
       tbody.innerHTML = dadosRecentes.map(item => `
         <tr>
-          <td>${item.temp}</td>
-          <td>${item.umi}</td>
-          <td>${item.ldr}</td>
+          <td>${item.temp.toFixed(1)}</td>
+          <td>${item.umi.toFixed(1)}</td>
           <td>${item.hora}</td>
         </tr>
       `).join('');
