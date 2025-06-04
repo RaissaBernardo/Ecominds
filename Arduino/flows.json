@@ -1,21 +1,119 @@
 [
     {
-        "id": "e96cb546257fb662",
+        "id": "2f245a46319ed19c",
+        "type": "tab",
+        "label": "Fluxo 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ea4985a2f2478c8b",
+        "type": "serial-port",
+        "name": "Arduíno",
+        "serialport": "COM3",
+        "serialbaud": "9600",
+        "databits": 8,
+        "parity": "none",
+        "stopbits": 1,
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": 10000
+    },
+    {
+        "id": "58099fd3c151e2fd",
+        "type": "MySQLdatabase",
+        "name": "Banco de Dados",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "dados",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "245962349c0fb4c5",
+        "type": "serial in",
+        "z": "2f245a46319ed19c",
+        "name": "",
+        "serial": "ea4985a2f2478c8b",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "19d5b32ce7845ea0"
+            ]
+        ]
+    },
+    {
+        "id": "85e2c87989a27b42",
+        "type": "debug",
+        "z": "2f245a46319ed19c",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "19d5b32ce7845ea0",
+        "type": "json",
+        "z": "2f245a46319ed19c",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 330,
+        "y": 120,
+        "wires": [
+            [
+                "ad68d8bb456ac0b2"
+            ]
+        ]
+    },
+    {
+        "id": "9bc862c6f05e785d",
+        "type": "mysql",
+        "z": "2f245a46319ed19c",
+        "mydb": "58099fd3c151e2fd",
+        "name": "",
+        "x": 690,
+        "y": 120,
+        "wires": [
+            [
+                "85e2c87989a27b42"
+            ]
+        ]
+    },
+    {
+        "id": "ad68d8bb456ac0b2",
         "type": "function",
-        "z": "220a2b4c3d45eb41",
-        "name": "function 5",
-        "func": "// variáveis globais\nmsg.topic = \"SELECT * FROM sensores\"\n\n/*\nmsg.payload = {\n    temp: global.get(\"temperatura\") || 0,\n    umi: global.get(\"umidade\") || 0,\n};\n*/\n\nreturn msg;\n",
+        "z": "2f245a46319ed19c",
+        "name": "function 1",
+        "func": "msg.topic = \"insert into sensores (umi, temp) VALUES (?,?)\";\nmsg.payload = [msg.payload.umi, msg.payload.temp];\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 680,
-        "y": 80,
+        "x": 500,
+        "y": 120,
         "wires": [
             [
-                "8a3b74faf7c755dc"
+                "9bc862c6f05e785d"
             ]
         ]
     }

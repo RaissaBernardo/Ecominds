@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EcoMinds - Dashboard Ambiental</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/dash.css') }}" />
+
+  <!-- Plotly -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <!-- JS -->
+  <script src="{{ url_for('static', filename='js/fetch.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
+  <header class="cabecalho">
+    <img id="img" src="{{ url_for('static', filename='img/logo.png') }}">
+    <h1 id="logo">Ecominds</h1>
+    <div class="intro">
+      <h1>Monitoramento Ambiental</h1>
+      <p>Visualização de Dados de Temperatura e Umidade</p>
+    </div>
+  </header>
+</head>
+<body>
+
+  <div class="dashboard">
+    <div class="status" id="status">
+      <p>Temperatura: <span id="temperatura">--</span>°C</p>
+      <p>Umidade: <span id="umidade">--</span>%</p>
+      <p>Status: <span id="status-condicao" class="status-normal">--</span></p>
+    </div>
+
+    <div class="chart-container" id="grafico-temperatura"></div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Temperatura (°C)</th>
+          <th>Umidade (%)</th>
+          <th>Data/Hora</th>
+        </tr>
+      </thead>
+      <tbody id="tabela-dados">
+        <!-- Dados serão inseridos via JavaScript -->
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

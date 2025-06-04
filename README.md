@@ -34,3 +34,12 @@ PROJETO EM EVOLUÇÃO
 ## Créditos
 
 Projeto desenvolvido pelos alunos da equipe **Ecominds** – SENAI São Carlos, Técnologo em Análise e Desenvolvimento de Sistemas.
+
+## Como rodar a página de dashboard do projeto
+
+- Carregar o banco de dados no MySql
+- Instalar: Pip install flask, flask-cors, pymysql
+- Abrir o código no VS Code e no terminal verificar se está dentro do diretório front
+- No terminal rodar: python server.py
+- Abrir no Live Server a página SERVER.PY
+- Aguardar alguns minutos até que os dados do banco sejam carregados e exibidos em tela
